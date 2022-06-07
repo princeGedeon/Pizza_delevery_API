@@ -1,3 +1,4 @@
+from datetime import timedelta
 
 from decouple import config
 from pathlib import Path
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #Package ajouté
+    'drf_yasg',
 
     'rest_framework',
     'djoser',
@@ -131,6 +133,10 @@ REST_FRAMEWORK={
     ),
 }
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+   'AUTH_HEADER_TYPES': ('Baerer',),
+    'ACCESS_TOKEN_LIFETIME':timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'BLACKLIST_AFTER_ROTATION':False,
+
 }
 
