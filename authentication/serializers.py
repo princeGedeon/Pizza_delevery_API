@@ -1,12 +1,19 @@
 from rest_framework import serializers
 
 from authentication.models import User
+from orders.serializers import OrderCreationSerializer
 
 
+class UserOrder(serializers.ModelSerializer):
+    order=OrderCreationSerializer(many=True)
+    class Meta:
+        model=User
+        fields=['username',"email","order"]
 class UserCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
         fields=['username',"email","phone_number","password"]
+
 
     def validate(self, attrs):
         username_exists=User.objects.filter(username=attrs["username"]).exists()

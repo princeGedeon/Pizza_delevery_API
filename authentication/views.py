@@ -3,9 +3,17 @@ from rest_framework import generics, status
 
 # Create your views here.
 from rest_framework.response import Response
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from authentication.serializers import UserCreationSerializer
+from authentication.models import User
+from authentication.serializers import UserCreationSerializer, UserOrder
 
+
+class UserOrderView(ReadOnlyModelViewSet):
+    serializer_class = UserOrder
+
+    def get_queryset(self):
+        return User.objects.all()
 
 class HelloAuthView(generics.GenericAPIView):
     def get(self,request):
